@@ -2,8 +2,7 @@ from dotenv import load_dotenv
 import os
 import aiohttp
 import asyncio
-import youtube_dl
-
+from youtubedownload import download_song
 
 load_dotenv()
 API_KEY = os.getenv('API_KEY')
@@ -17,22 +16,8 @@ async def search_youtube(searchQuery: str):
     session.close
     return youtube_list
 
-def download_song(vID):
-    url = f'https://www.youtube.com/watch?v={vID}'
-    filename = "temp.mp3"
-    options = {
-        'format':'bestaudio/best',
-        'keepvideo':False,
-        'outtmpl':filename,
-    }
-
-    with youtube_dl.YoutubeDL(options) as ydl:
-        ydl.download(url)
-
-    print(f"Download complete... {filename}")
-
 
 if __name__ == '__main__':
-    search = "kda"
+    search = "slothboi chains"
     result = asyncio.run(search_youtube(search))
     download_song(result['items'][0]['id']['videoId'])
