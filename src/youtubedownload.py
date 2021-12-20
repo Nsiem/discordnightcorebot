@@ -20,4 +20,4 @@ def download_song(vID):
     with yt_dlp.YoutubeDL(options) as ydl:
         ydl.download([vinfo['webpage_url']])
 
-    print("Download complete... {}".format(filename))
+    print(f"Download complete... {filename}")
